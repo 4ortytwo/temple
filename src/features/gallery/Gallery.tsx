@@ -13,10 +13,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { PayloadAction, Action } from "@reduxjs/toolkit";
 import { Dispatch } from "redux";
 import {
-  fetchAlbumsRequest,
-  fetchAlbumsSuccess,
-  fetchAlbumsFailure
-} from "./albumsSlice";
+  fetchGalleryRequest,
+  fetchGallerySuccess,
+  fetchGalleryFailure
+} from "./gallerySlice";
 import axios from "axios";
 import { RootState } from "../../redux/store";
 import { NavProps } from "../../ParamList";
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   }
 });
 
-interface AlbumsProps extends NavProps<"Albums"> {}
+interface GalleryProps extends NavProps<"Gallery"> {}
 
 const Item = ({ title }) => {
   return (
@@ -55,33 +55,35 @@ const Item = ({ title }) => {
     </View>
   );
 };
-const Albums = ({ navigation, route }: AlbumsProps) => {
+const Gallery = ({ navigation, route }: GalleryProps) => {
   const dispatch = useDispatch();
-  const fetchAlbums = async (): Promise<Action> => {
-    // const fetchAlbums = () => async (
+  const fetchGallery = async (): Promise<Action> => {
+    // const fetchGallery = () => async (
     //  dispatch: Dispatch<PayloadAction>
     //): Promise<Action> => {
-    dispatch(fetchAlbumsRequest());
+    dispatch(fetchGalleryRequest());
     console.log('we"re loaing');
     try {
       const { data } = await axios.get(
         "https://jsonplaceholder.typicode.com/albums/",
         {
-          params: { _limit: 10 }
+          params: {
+            _limit: 10
+          }
         }
       );
-      console.log("ALBUMS RECEIVED", data);
-      return dispatch(fetchAlbumsSuccess(data));
+      console.log("Gallery RECEIVED", data);
+      return dispatch(fetchGallerySuccess(data));
     } catch (e) {
       console.log("error");
-      return dispatch(fetchAlbumsFailure(e.message));
+      return dispatch(fetchGalleryFailure(e.message));
     }
   };
 
-  const albums = useSelector((state: RootState) => state.albums);
+  const gallery = useSelector((state: RootState) => state.gallery);
   const loading = useSelector((state: RootState) => state.loading);
   useEffect(() => {
-    fetchAlbums();
+    fetchGallery();
   }, []);
 
   const openAlbum = id => {
@@ -91,9 +93,9 @@ const Albums = ({ navigation, route }: AlbumsProps) => {
   return (
     <SafeAreaView style={styles.MainContainer}>
       {loading && <ActivityIndicator size="large" />}
-      <Text>Albums will be here</Text>
+      <Text>Gallery will be here</Text>
       <FlatList
-        data={albums}
+        data={gallery}
         renderItem={({ item }) => (
           <View style={{ flex: 1, flexDirection: "column", margin: 1 }}>
             <TouchableOpacity onPress={() => openAlbum(item.id)}>
@@ -109,4 +111,4 @@ const Albums = ({ navigation, route }: AlbumsProps) => {
   );
 };
 
-export default Albums;
+export default Gallery;

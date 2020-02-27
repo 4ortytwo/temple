@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import { ParamList } from "./ParamList";
-import Albums from "./features/albums/Albums";
-import Album from "./features/albums/Album";
+import Gallery from "./features/gallery/Gallery";
+import Album from "./features/gallery/Album";
 import { Login } from "./features/auth/Login";
 import { Register } from "./features/auth/Register";
 import { AsyncStorage, Text, ActivityIndicator, Button } from "react-native";
@@ -59,7 +59,7 @@ export const Routes: React.FC<RoutesProps> = ({}) => {
         >
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Register" component={Register} />
-          <Stack.Screen name="Albums" component={Albums} />
+          <Stack.Screen name="Gallery" component={Gallery} />
           <Stack.Screen name="Album" component={Album} />
         </Stack.Navigator>
       )}

@@ -1,23 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const { actions, reducer } = createSlice({
-  name: "albums",
+  name: "gallery",
   initialState: {
     loading: false,
     loaded: false,
-    albums: [],
+    gallery: [],
     error: null
   },
   reducers: {
-    fetchAlbumsRequest(state) {
+    fetchGalleryRequest(state) {
       state.loading = true;
     },
-    fetchAlbumsSuccess(state, action) {
+    fetchGallerySuccess(state, action) {
       state.loading = false;
       state.loaded = true;
-      state.albums = action.payload;
+      state.gallery = action.payload;
     },
-    fetchAlbumsFailure(state, action) {
+    fetchGalleryFailure(state, action) {
       state.loading = false;
       state.loaded = false;
       state.error = action.payload;
@@ -26,8 +26,8 @@ const { actions, reducer } = createSlice({
 });
 
 export const {
-  fetchAlbumsRequest,
-  fetchAlbumsSuccess,
-  fetchAlbumsFailure
+  fetchGalleryRequest,
+  fetchGallerySuccess,
+  fetchGalleryFailure
 } = actions;
-export const albumsReducer = reducer;
+export const galleryReducer = reducer;
