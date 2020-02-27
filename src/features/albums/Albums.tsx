@@ -1,5 +1,14 @@
 import React, { useEffect } from "react";
-import { View, Text, ActivityIndicator } from "react-native";
+import {
+  StyleSheet,
+  SafeAreaView,
+  View,
+  Text,
+  Image,
+  ActivityIndicator,
+  FlatList,
+  TouchableOpacity
+} from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { PayloadAction, Action } from "@reduxjs/toolkit";
 import { Dispatch } from "redux";
@@ -10,7 +19,43 @@ import {
 } from "./albumsSlice";
 import axios from "axios";
 import { RootState } from "../../redux/store";
-const Albums = () => {
+import { NavProps } from "../../ParamList";
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
+  item: {
+    backgroundColor: "#f9c2ff",
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16
+  },
+  title: {
+    fontSize: 32
+  },
+  MainContainer: {
+    justifyContent: "center",
+    flex: 1,
+    paddingTop: 30
+  },
+  imageThumbnail: {
+    justifyContent: "center",
+    alignItems: "center",
+    height: 100
+  }
+});
+
+interface AlbumsProps extends NavProps<"Albums"> {}
+
+const Item = ({ title }) => {
+  return (
+    <View style={styles.item}>
+      <Text style={styles.title}>{title}</Text>
+    </View>
+  );
+};
+const Albums = ({ navigation, route }: AlbumsProps) => {
   const dispatch = useDispatch();
   const fetchAlbums = async (): Promise<Action> => {
     // const fetchAlbums = () => async (
@@ -38,11 +83,29 @@ const Albums = () => {
   useEffect(() => {
     fetchAlbums();
   }, []);
+
+  const openAlbum = id => {
+    navigation.navigate("Album");
+  };
+
   return (
-    <View>
+    <SafeAreaView style={styles.MainContainer}>
       {loading && <ActivityIndicator size="large" />}
-      <Text>ALBUMS HERE</Text>
-    </View>
+      <Text>Albums will be here</Text>
+      <FlatList
+        data={albums}
+        renderItem={({ item }) => (
+          <View style={{ flex: 1, flexDirection: "column", margin: 1 }}>
+            <TouchableOpacity onPress={() => openAlbum(item.id)}>
+              <Text style={styles.imageThumbnail}>album{item.id}</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+        //Setting the number of column
+        numColumns={3}
+        keyExtractor={(item, index) => index.toString()}
+      />
+    </SafeAreaView>
   );
 };
 
