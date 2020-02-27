@@ -4,7 +4,7 @@ import { configureStore, Action, combineReducers } from "@reduxjs/toolkit";
 import { ThunkAction } from "redux-thunk";
 
 const store = configureStore({
-  reducer: combineReducers({ albumsReducer, authReducer })
+  reducer: combineReducers({ albums: albumsReducer, auth: authReducer })
 });
 
 export default store;
