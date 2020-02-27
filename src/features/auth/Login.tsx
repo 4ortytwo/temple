@@ -1,10 +1,11 @@
 import React from "react";
 import { View, Text, Button } from "react-native";
 import { NavProps } from "../../ParamList";
+import { login, logout } from "./authSlice";
 
 interface LoginProps extends NavProps<"Login"> {}
 
-export const Login: React.FC<LoginProps> = ({ navigation, route }) => {
+export const Login: React.FC<LoginProps> = ({ navigation }) => {
   return (
     <View>
       <Text>Login</Text>
