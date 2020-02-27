@@ -43,11 +43,12 @@ export const login = (userId: string): AppThunk => async dispatch => {
   const user = { userId };
   await AsyncStorage.setItem("user", JSON.stringify(user));
   const asyncUser = await AsyncStorage.getItem("user");
-  console.log("ASYNC USER", asyncUser);
+  console.log("ASYNC USER SET", JSON.parse(asyncUser));
   dispatch(setUserSuccess(userId));
 };
 
 export const logout = (): AppThunk => async dispatch => {
+  console.log("LOGOUT");
   dispatch(setUserRequest());
   await AsyncStorage.removeItem("user");
   dispatch(setUserSuccess(null));
