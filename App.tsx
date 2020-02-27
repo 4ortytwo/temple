@@ -1,10 +1,21 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
+import { Provider, useDispatch } from "react-redux";
+import store, { RootState } from "./src/redux/store";
+import Albums from "./src/features/albums/Albums";
 
-export default function App() {
+export default function AppWrapper() {
+  return (
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
+}
+
+export function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
+      <Albums />
     </View>
   );
 }
@@ -12,8 +23,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center"
+  }
 });
