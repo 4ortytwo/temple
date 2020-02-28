@@ -1,6 +1,6 @@
 import { AsyncStorage } from "react-native";
 import { createSlice } from "@reduxjs/toolkit";
-import store, { AsyncReducerState, AppThunk } from "../../redux/store";
+import { AsyncReducerState, AppThunk } from "../../redux/store";
 export type User = null | { userId: string };
 
 interface UserInitialState extends AsyncReducerState {
@@ -37,10 +37,10 @@ const { actions, reducer } = createSlice({
 export const { setUserRequest, setUserSuccess, setUserFailure } = actions;
 export const authReducer = reducer;
 
-export const login = (userString: string): AppThunk => async dispatch => {
+export const login = (userId: string): AppThunk => async dispatch => {
   console.log("LOGIN");
   dispatch(setUserRequest());
-  const user = { userId: userString };
+  const user = { userId };
   await AsyncStorage.setItem("user", JSON.stringify(user));
   dispatch(setUserSuccess(user));
 };

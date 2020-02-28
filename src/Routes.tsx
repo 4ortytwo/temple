@@ -13,12 +13,12 @@ export const Routes: React.FC<RoutesProps> = ({}) => {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.auth.user);
-
   useEffect(() => {
     AsyncStorage.getItem("user")
       .then(userString => {
         if (userString) {
-          dispatch(login(userString));
+          const { userId } = JSON.parse(userString);
+          dispatch(login(userId));
           setLoading(false);
         } else {
           setLoading(false);
