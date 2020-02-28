@@ -6,6 +6,7 @@ export type ParamList = {
   Album: undefined;
   Login: undefined;
   Register: undefined;
+  Profile: undefined;
 };
 
 export type NavProps<T extends keyof ParamList> = {
