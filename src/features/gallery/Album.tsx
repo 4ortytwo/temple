@@ -19,6 +19,7 @@ import {
 } from "./albumSlice";
 import axios from "axios";
 import { RootState } from "../../redux/store";
+import { PhotoType } from "../../@types/Gallery";
 
 const styles = StyleSheet.create({
   container: {
@@ -52,7 +53,8 @@ interface AlbumProps extends NavProps<"Album"> {
 const Album = ({
   route: {
     params: { albumId }
-  }
+  },
+  navigation
 }: AlbumProps) => {
   const dispatch = useDispatch();
   console.log("alid", albumId);
@@ -79,7 +81,10 @@ const Album = ({
   }, []);
 
   const album = useSelector((state: RootState) => state.album.album);
-
+  const openPhoto = (item: PhotoType) => {
+    console.log("beforeNavphoto", item);
+    navigation.navigate("Photo", item);
+  };
   return (
     <SafeAreaView style={styles.MainContainer}>
       <Text>HELLO WORLD I"M ALBUm{albumId}</Text>
@@ -93,8 +98,12 @@ const Album = ({
               margin: 1
             }}
           >
-            <TouchableOpacity onPress={() => {}}>
-              <Text style={styles.imageThumbnail}>Picture{item.id}</Text>
+            <TouchableOpacity onPress={() => openPhoto(item)}>
+              {/* <Text style={styles.imageThumbnail}>Picture{item.id}</Text> */}
+              <Image
+                style={styles.imageThumbnail}
+                source={{ uri: item.thumbnailUrl }}
+              />
             </TouchableOpacity>
           </View>
         )}
