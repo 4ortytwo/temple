@@ -66,12 +66,12 @@ const Gallery = ({ navigation, route }: GalleryProps) => {
     // console.log('we"re loaing');
     try {
       const { data } = await axios.get(
-        "https://jsonplaceholder.typicode.com/albums/",
-        {
-          params: {
-            _limit: 10
-          }
-        }
+        "https://jsonplaceholder.typicode.com/albums"
+        // {
+        //   params: {
+        //     _limit: 10
+        //   }
+        // }
       );
       return dispatch(fetchGallerySuccess(data));
     } catch (e) {
@@ -88,14 +88,16 @@ const Gallery = ({ navigation, route }: GalleryProps) => {
   // * post this in ReadMe -> using it this way to target the variable directly without destructuring as advised by Redux team to prevent unnecessary re-renders
   const gallery = useSelector((state: RootState) => state.gallery.gallery);
 
-  const openAlbum = id => {
-    navigation.navigate("Album");
+  const openAlbum = ({ albumId, albumTitle }) => {
+    console.log("id", albumId);
+    console.log("title", albumTitle);
+
+    navigation.navigate("Album", { albumId, albumTitle });
   };
 
   return (
-    <SafeAreaView style={styles.MainContainer}>
+    <View style={styles.MainContainer}>
       {loading && <ActivityIndicator size="large" />}
-      <Text>Gallery will be here</Text>
       <FlatList
         data={gallery}
         renderItem={({ item }) => (
@@ -106,16 +108,20 @@ const Gallery = ({ navigation, route }: GalleryProps) => {
               margin: 1
             }}
           >
-            <TouchableOpacity onPress={() => openAlbum(item.id)}>
+            <TouchableOpacity
+              onPress={() =>
+                openAlbum({ albumId: item.id, albumTitle: item.title })
+              }
+            >
               <Text style={styles.imageThumbnail}>album{item.id}</Text>
             </TouchableOpacity>
           </View>
         )}
         //Setting the number of column
         numColumns={3}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.title}
       />
-    </SafeAreaView>
+    </View>
   );
 };
 
