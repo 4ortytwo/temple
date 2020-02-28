@@ -4,6 +4,7 @@ import { ParamList } from "../ParamList";
 import Gallery from "./gallery/Gallery";
 import { Ionicons } from "@expo/vector-icons";
 import { Profile } from "./profile/Profile";
+import { GalleryStack } from "./gallery/GalleryStack";
 
 interface AppTabsProps {}
 
@@ -31,7 +32,7 @@ export const AppTabs: React.FC<AppTabsProps> = ({}) => {
         inactiveTintColor: "gray"
       }}
     >
-      <Tabs.Screen name="Gallery" component={Gallery} />
+      <Tabs.Screen name="Gallery" component={GalleryStack} />
       <Tabs.Screen name="Profile" component={Profile} />
     </Tabs.Navigator>
   );
