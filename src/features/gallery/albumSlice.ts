@@ -5,19 +5,19 @@ const { actions, reducer } = createSlice({
   initialState: {
     loading: false,
     loaded: false,
-    albums: [],
+    album: [],
     error: null
   },
   reducers: {
-    fetchAlbumsRequest(state) {
+    fetchAlbumRequest(state) {
       state.loading = true;
     },
-    fetchAlbumsSuccess(state, action) {
+    fetchAlbumSuccess(state, action) {
       state.loading = false;
       state.loaded = true;
-      state.albums = action.payload;
+      state.album = action.payload;
     },
-    fetchAlbumsFailure(state, action) {
+    fetchAlbumFailure(state, action) {
       state.loading = false;
       state.loaded = false;
       state.error = action.payload;
@@ -26,8 +26,8 @@ const { actions, reducer } = createSlice({
 });
 
 export const {
-  fetchAlbumsRequest,
-  fetchAlbumsSuccess,
-  fetchAlbumsFailure
+  fetchAlbumRequest,
+  fetchAlbumSuccess,
+  fetchAlbumFailure
 } = actions;
-export const albumsReducer = reducer;
+export const albumReducer = reducer;
