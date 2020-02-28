@@ -1,10 +1,15 @@
+import { albumReducer } from "./../features/gallery/albumSlice";
 import { authReducer } from "./../features/auth/authSlice";
 import { galleryReducer } from "../features/gallery/gallerySlice";
 import { configureStore, Action, combineReducers } from "@reduxjs/toolkit";
 import { ThunkAction } from "redux-thunk";
 
 const store = configureStore({
-  reducer: combineReducers({ gallery: galleryReducer, auth: authReducer })
+  reducer: combineReducers({
+    gallery: galleryReducer,
+    auth: authReducer,
+    album: albumReducer
+  })
 });
 
 export default store;

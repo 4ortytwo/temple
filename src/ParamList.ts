@@ -3,7 +3,10 @@ import { RouteProp } from "@react-navigation/native";
 
 export type ParamList = {
   Gallery: undefined;
-  Album: undefined;
+  Album: {
+    albumId: string;
+    albumTitle: string;
+  };
   Login: undefined;
   Register: undefined;
   Profile: undefined;
