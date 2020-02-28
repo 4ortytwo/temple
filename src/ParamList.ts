@@ -1,3 +1,4 @@
+import { PhotoType } from "./@types/Gallery";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RouteProp } from "@react-navigation/native";
 
@@ -10,6 +11,7 @@ export type ParamList = {
   Login: undefined;
   Register: undefined;
   Profile: undefined;
+  Photo: PhotoType;
 };
 
 export type NavProps<T extends keyof ParamList> = {

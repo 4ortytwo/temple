@@ -1,13 +1,23 @@
+import { Album } from "./../../@types/Gallery";
 import { createSlice } from "@reduxjs/toolkit";
+import { AsyncReducerState } from "../../redux/store";
+
+export type AlbumDataState = {
+  album: Album;
+};
+
+export type AlbumState = AlbumDataState & AsyncReducerState;
+
+export const initialState = {
+  loading: false,
+  loaded: false,
+  album: {},
+  error: null
+};
 
 const { actions, reducer } = createSlice({
   name: "album",
-  initialState: {
-    loading: false,
-    loaded: false,
-    album: [],
-    error: null
-  },
+  initialState,
   reducers: {
     fetchAlbumRequest(state) {
       state.loading = true;
