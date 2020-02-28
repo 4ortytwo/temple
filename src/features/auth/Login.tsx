@@ -17,7 +17,7 @@ export const Login: React.FC<LoginProps> = ({ navigation }) => {
         title="Go to register"
         onPress={() => navigation.navigate("Register")}
       />
-      <Button title="LOGIN" onPress={() => dispatch(login("USERNAME"))} />
+      <Button title="LOGIN" onPress={() => dispatch(login("Monk"))} />
       {user && <Button title="LOGOUT" onPress={() => dispatch(logout())} />}
     </Center>
   );

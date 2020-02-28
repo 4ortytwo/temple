@@ -37,14 +37,12 @@ const { actions, reducer } = createSlice({
 export const { setUserRequest, setUserSuccess, setUserFailure } = actions;
 export const authReducer = reducer;
 
-export const login = (userId: string): AppThunk => async dispatch => {
+export const login = (userString: string): AppThunk => async dispatch => {
   console.log("LOGIN");
   dispatch(setUserRequest());
-  const user = { userId };
+  const user = { userId: userString };
   await AsyncStorage.setItem("user", JSON.stringify(user));
-  const asyncUser = await AsyncStorage.getItem("user");
-  console.log("ASYNC USER SET", JSON.parse(asyncUser));
-  dispatch(setUserSuccess(userId));
+  dispatch(setUserSuccess(user));
 };
 
 export const logout = (): AppThunk => async dispatch => {
