@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
   imageThumbnail: {
     justifyContent: "center",
     alignItems: "center",
+    textAlign: "center",
     height: 100
   }
 });
@@ -62,7 +63,7 @@ const Gallery = ({ navigation, route }: GalleryProps) => {
     //  dispatch: Dispatch<PayloadAction>
     //): Promise<Action> => {
     dispatch(fetchGalleryRequest());
-    console.log('we"re loaing');
+    // console.log('we"re loaing');
     try {
       const { data } = await axios.get(
         "https://jsonplaceholder.typicode.com/albums/",
@@ -72,19 +73,20 @@ const Gallery = ({ navigation, route }: GalleryProps) => {
           }
         }
       );
-      console.log("Gallery RECEIVED", data);
       return dispatch(fetchGallerySuccess(data));
     } catch (e) {
-      console.log("error");
+      // console.log("error");
       return dispatch(fetchGalleryFailure(e.message));
     }
   };
 
-  const gallery = useSelector((state: RootState) => state.gallery);
   const loading = useSelector((state: RootState) => state.loading);
   useEffect(() => {
     fetchGallery();
   }, []);
+
+  // * using it this way to target the variable directly without destructuring as advised by Redux team to prevent unnecessary re-renders
+  const gallery = useSelector((state: RootState) => state.gallery.gallery);
 
   const openAlbum = id => {
     navigation.navigate("Album");
@@ -97,7 +99,13 @@ const Gallery = ({ navigation, route }: GalleryProps) => {
       <FlatList
         data={gallery}
         renderItem={({ item }) => (
-          <View style={{ flex: 1, flexDirection: "column", margin: 1 }}>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: "column",
+              margin: 1
+            }}
+          >
             <TouchableOpacity onPress={() => openAlbum(item.id)}>
               <Text style={styles.imageThumbnail}>album{item.id}</Text>
             </TouchableOpacity>
@@ -105,7 +113,7 @@ const Gallery = ({ navigation, route }: GalleryProps) => {
         )}
         //Setting the number of column
         numColumns={3}
-        keyExtractor={(item, index) => index.toString()}
+        keyExtractor={item => item.id}
       />
     </SafeAreaView>
   );
