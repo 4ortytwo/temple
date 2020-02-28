@@ -43,18 +43,7 @@ const Album = ({ album }: AlbumProps) => {
   useEffect(() => {}, []);
   return (
     <SafeAreaView style={styles.MainContainer}>
-      {loading && <ActivityIndicator size="large" />}
-      <FlatList
-        data={albums}
-        renderItem={({ item }) => (
-          <View style={{ flex: 1, flexDirection: "column", margin: 1 }}>
-            <Image style={styles.imageThumbnail} source={{ uri: item.src }} />
-          </View>
-        )}
-        //Setting the number of column
-        numColumns={3}
-        keyExtractor={(item, index) => index.toString()}
-      />
+      <Text>HELLO WORLD I"M ALBUm</Text>
     </SafeAreaView>
   );
 };

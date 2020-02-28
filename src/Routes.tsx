@@ -23,7 +23,6 @@ export const Routes: React.FC<RoutesProps> = ({}) => {
         } else {
           setLoading(false);
         }
-        console.log("userString", userString);
       })
       .catch(e => {
         console.warn("error", e);
