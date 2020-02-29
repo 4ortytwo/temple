@@ -1,7 +1,6 @@
 import React from "react";
 import { Image, View } from "react-native";
 import { NavProps } from "../../ParamList";
-import { Center } from "../Center";
 import { PhotoType } from "../../@types/Gallery";
 
 interface PhotoProps extends NavProps<"Photo">, PhotoType {}

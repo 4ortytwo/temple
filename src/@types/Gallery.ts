@@ -1,14 +1,14 @@
 export type PhotoType = {
-  albumId: number;
+  albumId: string;
   id: number;
-  title: string;
+  title?: string;
   url: string;
   thumbnailUrl: string;
 };
 
 export interface Album {
-  userId: number;
-  id: number;
+  userId?: number;
+  id: string;
   title: string;
 }
 

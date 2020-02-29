@@ -8,7 +8,7 @@ export type GalleryDataState = {
 
 export type GalleryState = GalleryDataState & AsyncReducerState;
 
-export const initialState = {
+export const initialState: GalleryState = {
   loading: false,
   loaded: false,
   gallery: [],

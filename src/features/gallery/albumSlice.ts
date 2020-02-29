@@ -1,17 +1,17 @@
-import { Album } from "./../../@types/Gallery";
+import { PhotoType } from "./../../@types/Gallery";
 import { createSlice } from "@reduxjs/toolkit";
 import { AsyncReducerState } from "../../redux/store";
 
 export type AlbumDataState = {
-  album: Album;
+  album: PhotoType[] | [];
 };
 
 export type AlbumState = AlbumDataState & AsyncReducerState;
 
-export const initialState = {
+export const initialState: AlbumState = {
   loading: false,
   loaded: false,
-  album: {},
+  album: [],
   error: null
 };
 

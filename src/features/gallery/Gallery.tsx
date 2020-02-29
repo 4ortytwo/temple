@@ -20,6 +20,7 @@ import {
 import axios from "axios";
 import { RootState } from "../../redux/store";
 import { NavProps } from "../../ParamList";
+import { Album } from "../../@types/Gallery";
 
 const styles = StyleSheet.create({
   container: {
@@ -58,13 +59,14 @@ const Item = ({ title }) => {
 };
 const Gallery = ({ navigation, route }: GalleryProps) => {
   const dispatch = useDispatch();
-  const fetchGallery = async (): Promise<Action> => {
-    // const fetchGallery = () => async (
-    //  dispatch: Dispatch<PayloadAction>
-    //): Promise<Action> => {
+  const loading = useSelector((state: RootState) => state.gallery.loading);
+  const gallery =
+    useSelector((state: RootState) => state.gallery.gallery) || [];
+  const fetchGallery = async () => {
     dispatch(fetchGalleryRequest());
-    // console.log('we"re loaing');
     try {
+      console.log("try in gallery");
+
       const { data } = await axios.get(
         "https://jsonplaceholder.typicode.com/albums"
         // {
@@ -73,26 +75,24 @@ const Gallery = ({ navigation, route }: GalleryProps) => {
         //   }
         // }
       );
-      return dispatch(fetchGallerySuccess(data));
+      dispatch(fetchGallerySuccess(data));
     } catch (e) {
-      // console.log("error");
-      return dispatch(fetchGalleryFailure(e.message));
+      console.log("error in gallery");
+      dispatch(fetchGalleryFailure(e.message));
     }
   };
 
-  const loading = useSelector((state: RootState) => state.loading);
   useEffect(() => {
-    fetchGallery();
+    if (!gallery.length) {
+      fetchGallery();
+    }
   }, []);
 
-  // * post this in ReadMe -> using it this way to target the variable directly without destructuring as advised by Redux team to prevent unnecessary re-renders
-  const gallery = useSelector((state: RootState) => state.gallery.gallery);
+  const openAlbum = ({ id, title }: Album) => {
+    console.log("id", id);
+    console.log("title", title);
 
-  const openAlbum = ({ albumId, albumTitle }) => {
-    console.log("id", albumId);
-    console.log("title", albumTitle);
-
-    navigation.navigate("Album", { albumId, albumTitle });
+    navigation.navigate("Album", { id, title });
   };
 
   return (
@@ -109,9 +109,7 @@ const Gallery = ({ navigation, route }: GalleryProps) => {
             }}
           >
             <TouchableOpacity
-              onPress={() =>
-                openAlbum({ albumId: item.id, albumTitle: item.title })
-              }
+              onPress={() => openAlbum({ id: item.id, title: item.title })}
             >
               <Text style={styles.imageThumbnail}>album{item.id}</Text>
             </TouchableOpacity>

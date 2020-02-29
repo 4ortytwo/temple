@@ -29,7 +29,7 @@ export const GalleryStack: React.FC<GalleryStackProps> = ({}) => {
       />
       <Stack.Screen
         options={({ route }) => ({
-          headerTitle: `Album #${route.params.albumId}`
+          headerTitle: `Album #${route.params.id}`
         })}
         name="Album"
         component={Album}
