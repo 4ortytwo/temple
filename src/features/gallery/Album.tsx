@@ -2,21 +2,13 @@ import {
   StyleSheet,
   SafeAreaView,
   View,
-  Text,
   Image,
-  ActivityIndicator,
   FlatList,
   TouchableOpacity
 } from "react-native";
 import { NavProps } from "../../ParamList";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Action } from "@reduxjs/toolkit";
-import {
-  fetchAlbumRequest,
-  fetchAlbumSuccess,
-  fetchAlbumFailure
-} from "./albumSlice";
 import axios from "axios";
 import { RootState } from "../../redux/store";
 import { PhotoType } from "../../@types/Gallery";
@@ -60,27 +52,18 @@ const Album = ({
   navigation
 }: AlbumProps) => {
   const dispatch = useDispatch();
-  console.log("alid", id);
   const album =
     useSelector((state: RootState) => state.albums.albums[id]) || [];
 
   const fetchAlbum = async () => {
     dispatch(fetchAlbumsRequest());
     try {
-      console.log("try in fetchAlbums");
       const { data } = await axios.get(
         `https://jsonplaceholder.typicode.com/albums/${id}/photos`
-        // {
-        //   params: {
-        //     _limit: 10
-        //   }
-        // }
       );
       dispatch(fetchAlbumsSuccess({ album: data }));
     } catch (e) {
-      // console.log("error");
       dispatch(fetchAlbumsFailure(e.message));
-      console.log("error here");
     }
   };
   useEffect(() => {
@@ -90,16 +73,14 @@ const Album = ({
   }, []);
 
   const openPhoto = (item: PhotoType) => {
-    console.log("beforeNavphoto", item);
     navigation.navigate("Photo", item);
   };
-  console.log("album before", album);
   return (
     <SafeAreaView style={styles.MainContainer}>
       {album.length !== 0 && (
         <FlatList
           data={album}
-          renderItem={({ item }) => (
+          renderItem={({ item }: { item: PhotoType }) => (
             <View
               style={{
                 flex: 1,
@@ -108,7 +89,6 @@ const Album = ({
               }}
             >
               <TouchableOpacity onPress={() => openPhoto(item)}>
-                {/* <Text style={styles.imageThumbnail}>Picture{item.id}</Text> */}
                 <Image
                   style={styles.imageThumbnail}
                   source={{ uri: item.thumbnailUrl }}

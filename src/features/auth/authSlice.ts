@@ -38,7 +38,6 @@ export const { setUserRequest, setUserSuccess, setUserFailure } = actions;
 export const authReducer = reducer;
 
 export const login = (userId: string): AppThunk => async dispatch => {
-  console.log("LOGIN");
   dispatch(setUserRequest());
   const user = { userId };
   await AsyncStorage.setItem("user", JSON.stringify(user));
@@ -46,7 +45,6 @@ export const login = (userId: string): AppThunk => async dispatch => {
 };
 
 export const logout = (): AppThunk => async dispatch => {
-  console.log("LOGOUT");
   dispatch(setUserRequest());
   await AsyncStorage.removeItem("user");
   dispatch(setUserSuccess(null));

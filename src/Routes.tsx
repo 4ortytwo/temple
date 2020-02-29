@@ -3,9 +3,10 @@ import { NavigationContainer } from "@react-navigation/native";
 import { AsyncStorage, ActivityIndicator } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "./redux/store";
-import { login, logout } from "../src/features/auth/authSlice";
+import { login } from "../src/features/auth/authSlice";
 import { AppTabs } from "./features/AppTabs";
 import { AuthStack } from "./features/auth/AuthStack";
+import { Center } from "./features/Center";
 
 interface RoutesProps {}
 
@@ -27,13 +28,13 @@ export const Routes: React.FC<RoutesProps> = ({}) => {
       });
   }, []);
 
-  // if (loading) {
-  //   return (
-  //     <Center>
-  //       <ActivityIndicator size="large" />
-  //     </Center>
-  //   );
-  // }
+  if (loading) {
+    return (
+      <Center>
+        <ActivityIndicator size="large" />
+      </Center>
+    );
+  }
 
   return (
     <NavigationContainer>

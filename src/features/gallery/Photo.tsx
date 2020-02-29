@@ -7,12 +7,9 @@ interface PhotoProps extends NavProps<"Photo">, PhotoType {}
 
 export const Photo: React.FC<PhotoProps> = ({
   route: {
-    params: { url, title }
+    params: { url }
   }
 }) => {
-  console.log("PHOUYRL", url);
-  console.log("PHOTO TITLE", title);
-
   return (
     <View>
       <Image

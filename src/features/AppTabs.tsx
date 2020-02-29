@@ -13,14 +13,7 @@ export const AppTabs: React.FC<AppTabsProps> = ({}) => {
   return (
     <Tabs.Navigator
       screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, size }) => {
-          // let iconName;
-
-          // if (route.name === "Gallery") {
-          //   iconName = "md-albums";
-          // } else if (route.name === "Profile") {
-          //   iconName = "md-person";
-          // }
+        tabBarIcon: ({ color, size }) => {
           const getIcon = (routeName: string) => {
             switch (routeName) {
               case "Gallery":

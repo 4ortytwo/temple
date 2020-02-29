@@ -1,6 +1,6 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { ParamList, NavProps } from "../../ParamList";
+import { ParamList } from "../../ParamList";
 import Gallery from "./Gallery";
 import { TouchableOpacity, Text } from "react-native";
 import Album from "./Album";

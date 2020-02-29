@@ -1,17 +1,13 @@
 import React, { useEffect } from "react";
 import {
   StyleSheet,
-  SafeAreaView,
   View,
   Text,
-  Image,
   ActivityIndicator,
   FlatList,
   TouchableOpacity
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { PayloadAction, Action } from "@reduxjs/toolkit";
-import { Dispatch } from "redux";
 import {
   fetchGalleryRequest,
   fetchGallerySuccess,
@@ -50,14 +46,7 @@ const styles = StyleSheet.create({
 
 interface GalleryProps extends NavProps<"Gallery"> {}
 
-const Item = ({ title }) => {
-  return (
-    <View style={styles.item}>
-      <Text style={styles.title}>{title}</Text>
-    </View>
-  );
-};
-const Gallery = ({ navigation, route }: GalleryProps) => {
+const Gallery = ({ navigation }: GalleryProps) => {
   const dispatch = useDispatch();
   const loading = useSelector((state: RootState) => state.gallery.loading);
   const gallery =
@@ -65,19 +54,11 @@ const Gallery = ({ navigation, route }: GalleryProps) => {
   const fetchGallery = async () => {
     dispatch(fetchGalleryRequest());
     try {
-      console.log("try in gallery");
-
       const { data } = await axios.get(
         "https://jsonplaceholder.typicode.com/albums"
-        // {
-        //   params: {
-        //     _limit: 10
-        //   }
-        // }
       );
       dispatch(fetchGallerySuccess(data));
     } catch (e) {
-      console.log("error in gallery");
       dispatch(fetchGalleryFailure(e.message));
     }
   };
@@ -89,9 +70,6 @@ const Gallery = ({ navigation, route }: GalleryProps) => {
   }, []);
 
   const openAlbum = ({ id, title }: Album) => {
-    console.log("id", id);
-    console.log("title", title);
-
     navigation.navigate("Album", { id, title });
   };
 
