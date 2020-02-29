@@ -1,13 +1,10 @@
-import { PhotoType } from "./@types/Gallery";
+import { PhotoType, Album } from "./@types/Gallery";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RouteProp } from "@react-navigation/native";
 
 export type ParamList = {
   Gallery: undefined;
-  Album: {
-    albumId: string;
-    albumTitle: string;
-  };
+  Album: Album;
   Login: undefined;
   Register: undefined;
   Profile: undefined;

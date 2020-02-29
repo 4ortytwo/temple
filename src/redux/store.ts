@@ -1,4 +1,5 @@
 import { albumReducer } from "./../features/gallery/albumSlice";
+import { albumsReducer } from "./../features/gallery/albumsSlice";
 import { authReducer } from "./../features/auth/authSlice";
 import { galleryReducer } from "../features/gallery/gallerySlice";
 import { configureStore, Action, combineReducers } from "@reduxjs/toolkit";
@@ -8,8 +9,10 @@ const store = configureStore({
   reducer: combineReducers({
     gallery: galleryReducer,
     auth: authReducer,
-    album: albumReducer
-  })
+    album: albumReducer,
+    albums: albumsReducer
+  }),
+  devTools: true
 });
 
 export default store;

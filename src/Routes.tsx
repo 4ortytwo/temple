@@ -19,10 +19,8 @@ export const Routes: React.FC<RoutesProps> = ({}) => {
         if (userString) {
           const { userId } = JSON.parse(userString);
           dispatch(login(userId));
-          setLoading(false);
-        } else {
-          setLoading(false);
         }
+        setLoading(false);
       })
       .catch(e => {
         console.warn("error", e);

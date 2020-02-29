@@ -1,7 +1,6 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { ParamList } from "../ParamList";
-import Gallery from "./gallery/Gallery";
 import { Ionicons } from "@expo/vector-icons";
 import { Profile } from "./profile/Profile";
 import { GalleryStack } from "./gallery/GalleryStack";
@@ -15,16 +14,28 @@ export const AppTabs: React.FC<AppTabsProps> = ({}) => {
     <Tabs.Navigator
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
-          let iconName;
+          // let iconName;
 
-          if (route.name === "Gallery") {
-            iconName = "md-albums";
-          } else if (route.name === "Profile") {
-            iconName = "md-person";
-          }
+          // if (route.name === "Gallery") {
+          //   iconName = "md-albums";
+          // } else if (route.name === "Profile") {
+          //   iconName = "md-person";
+          // }
+          const getIcon = (routeName: string) => {
+            switch (routeName) {
+              case "Gallery":
+                return "md-albums";
+              case "Profile":
+                return "md-person";
+              default:
+                throw new Error("no icon");
+            }
+          };
 
           // You can return any component that you like here!
-          return <Ionicons name={iconName} size={size} color={color} />;
+          return (
+            <Ionicons name={getIcon(route.name)} size={size} color={color} />
+          );
         }
       })}
       tabBarOptions={{
