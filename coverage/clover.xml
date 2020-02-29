@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1582983674163" clover="3.2.0">
+  <project timestamp="1582983674164" name="All files">
+    <metrics statements="11" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0" elements="14" coveredelements="4" complexity="0" loc="11" ncloc="11" packages="1" files="1" classes="1"/>
+    <file name="albumsSlice.ts" path="/Users/arthur/code/react-native/temple/src/features/gallery/albumsSlice.ts">
+      <metrics statements="11" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
+      <line num="11" count="1" type="stmt"/>
+      <line num="22" count="1" type="stmt"/>
+      <line num="27" count="0" type="stmt"/>
+      <line num="30" count="0" type="stmt"/>
+      <line num="31" count="0" type="stmt"/>
+      <line num="32" count="0" type="stmt"/>
+      <line num="35" count="0" type="stmt"/>
+      <line num="36" count="0" type="stmt"/>
+      <line num="37" count="0" type="stmt"/>
+      <line num="46" count="1" type="stmt"/>
+      <line num="47" count="1" type="stmt"/>
+    </file>
+  </project>
+</coverage>
